@@ -1,7 +1,21 @@
 <h2><%= @book.title %></h2>
 <h3><%= @book.author %></h3>
-<h4>Category:<%= @book.category.name%></h4>
+<h5>Category: <%= @book.category.name%></h5>
 <p><%= @book.description%></p>
+
+
+    <%= render @book.reviews%>
+
+    <!-- will render all reviews for the book-->
+
+
+
+    <div>
+        <%= link_to "Add Review", new_book_review_path(@book)%>
+    </div>
+
+
+
 <%= link_to "Back", root_path%>
 
 <% if user_signed_in? %>

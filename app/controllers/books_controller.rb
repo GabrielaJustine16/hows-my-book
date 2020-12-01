@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
     before_action :find_book, only: [:show,:edit,:update,:destroy]
-
+    before_action :authenticate_user!, only: [:new, :edit]
+    #fixed the error undefiner new method for nilclass
     def index
         @books=Book.all.order("created_at DESC")
     end 
@@ -12,8 +13,8 @@ class BooksController < ApplicationController
     end 
 
     def new
-        @book=current_user.books.build
-        @categies= Category.all.map{ |c| [c.name,c.id]}
+        @book = current_user.books.build
+		@categories = Category.all.map{ |c| [c.name, c.id] }
         #when creating select_tag for the dropdown menu in the form partial file, options_for_select requires an array of arrays, which provide the text for the dropdown option its name and the valie, its id
         #@book= Book.new 
         #use instance varialbe in views
@@ -35,10 +36,12 @@ class BooksController < ApplicationController
     end 
     #instead of making a create.html page, we will have this redirect to the root path when the create button is hit. in rake routes, root is the path to the index page which is the home page
     def edit
+        @categories = Category.all.map{ |c| [c.name,c.id]}
     
     end 
 
     def update
+        @book.category_id = params[:category_id]
         if @book.update(book_params)
             redirect_to book_path(@book)
         else
@@ -55,7 +58,7 @@ class BooksController < ApplicationController
     private
  
         def book_params
-            params.require(:book).permit(:title, :description, :author)
+            params.require(:book).permit(:title, :description, :author, :category_id)
         end 
 
         def find_book

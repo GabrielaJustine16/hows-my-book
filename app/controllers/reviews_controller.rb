@@ -9,14 +9,16 @@ class ReviewsController < ApplicationController
     
     def new
         @review = Review.new
+        
     end 
+
 
 
     def create
         @review = Review.new(review_params)
         #we want to assosiate review with current user and current book
-         @review.book_id = @book.id 
-         @review.user_id = current_user.id
+        @review.book_id = @book.id 
+        @review.user_id = current_user.id
          #set book id atribute to current
         if @review.save
             redirect_to book_path(@book)
@@ -38,6 +40,13 @@ class ReviewsController < ApplicationController
             redirect_to book_path(@book)
         else
             render 'edit'
+        end 
+    end 
+
+    def delete
+        @review.destroy 
+        redirect_to book_path(@book)
+    #we have the review already in the before action at the top
     end 
 
     private

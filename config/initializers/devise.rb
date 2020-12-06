@@ -91,9 +91,8 @@ Devise.setup do |config|
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
   # config.paranoid = true
-  config.omniauth :github, '249b749f5c4110deb01b
-  ', 'c3f801154c2756a51961b8483fc0017f3345bd6f', :scope => 'user:email'
-
+  
+  #GOES HERE$$$$$$$$$$$$$%%%%%%%%%%%%%%$$$$$$$$$$$$$$$$$$
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.

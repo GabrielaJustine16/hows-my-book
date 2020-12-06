@@ -1,5 +1,47 @@
-<%= simple_form_for([@book, @book.reviews.build]) do |f| %>
+
+
+
+<%=simple_form_for([@book, @book.reviews.build]) do |f| %>  
+
+   
+<% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@review.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+    
+    
     <%= f.input :rating%>
     <%= f.input :comment%>
+        
+        <div> 
+        <h3>Or create a new Book:</h3>
+            <%= f.fields_for :book, Book.new do |book_attributes|%>
+                <%= book_attributes.input :title, label: "Title: " %>
+                <%= book_attributes.input :author, label: "Author: " %>
+                <%= book_attributes.input :description, label: "Description: " %>
+            <% end %>
+        
+        
+        
+        </div>
+    
+    
     <%= f.button :submit%>
+
+
+
+
+
+
 <% end %>
+
+
+
+	

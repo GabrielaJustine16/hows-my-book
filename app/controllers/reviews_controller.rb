@@ -6,9 +6,24 @@ class ReviewsController < ApplicationController
     #before_action :find_book
 
     #we want access to @book instace variable in all of our views so were going to adda before action
-    
+    def index
+        if params[:book_id]
+          @books = Book.find(params[:book_id]).reviews
+        else
+          @reviews = Review.alpha
+        end
+      end
+     
+      def show
+        @review = Review.find(params[:id])
+      end
     def new
         @review = Review.new
+        @review.build_book
+
+        #@review = Review.find_by(id: params[:id])
+        #@review = Review.new
+        #@review.build_review
         
     end 
 
@@ -43,7 +58,7 @@ class ReviewsController < ApplicationController
         end 
     end 
 
-    def delete
+    def destroy
         @review.destroy 
         redirect_to book_path(@book)
     #we have the review already in the before action at the top
@@ -52,11 +67,12 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.require(:review).permit(:rating, :comment)
+        params.require(:review).permit(:rating, :comment, book_attributes: [:title,:author,:description])
     end 
 
     def find_book
-        @book = Book.find(params[:book_id])
+        #@book = Book.find(params[:book_id])
+        @book = Book.find_by(id: [params[:id], params[:book_id]])
          
     end 
 

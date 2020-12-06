@@ -3,27 +3,38 @@ class BooksController < ApplicationController
     before_action :authenticate_user!, only: [:new, :edit]
     #fixed the error undefiner new method for nilclass
     def index
-        @books=Book.all.order("created_at DESC")
+        #@book = Book.find(params[:id])
+        @books=Book.all.ordered_by_title
     end 
     #will be listed in descending order
 
     def show
+        @book = Book.find(params[:id])
         
 
     end 
 
     def new
+        #@books=Book.all
         @book = current_user.books.build
-		@categories = Category.all.map{ |c| [c.name, c.id] }
+        @categories = Category.all.map{ |c| [c.name, c.id] }
+        #@book = Book.new
+        #@book.build_review
         #when creating select_tag for the dropdown menu in the form partial file, options_for_select requires an array of arrays, which provide the text for the dropdown option its name and the valie, its id
         #@book= Book.new 
         #use instance varialbe in views
+        #the last 2 are just added
     end 
 
     def create
+        #@books=Book.all
         @book=current_user.books.build(book_params)
         #assosiate book with a category by id
         @book.category_id = params[:category_id]
+
+        
+
+        
 
 
         #@book=Book.new(book_params)

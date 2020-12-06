@@ -1,7 +1,7 @@
 <h2><%= @book.title %></h2>
-<h3><%= @book.author %></h3>
-<h5>Category: <%= @book.category.name%></h5>
-<p><%= @book.description%></p>
+<h3>Author:<%= @book.author %></h3>
+<h5>Category: <%= @book.category_name%></h5>
+<p>Description:<%= @book.description%></p>
 
 
     <%= render @book.reviews%>
@@ -12,7 +12,10 @@
 
     <div>
         <%= link_to "Add Review", new_book_review_path(@book)%>
+
     </div>
+
+    
 
 
 
@@ -26,6 +29,4 @@
     <%= link_to "Delete", book_path(@book), method: :delete, data: {confirm: "Are you sure?"}%>
     
     <%end%>
-
 <%end %>
-

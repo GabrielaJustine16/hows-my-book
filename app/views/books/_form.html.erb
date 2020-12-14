@@ -16,7 +16,18 @@
 <%= select_tag(:category_id, options_for_select(@categories || Category.all.map { |c| [ c.name, c.id ] }), :prompt => "Select one!") %>
     <%= f.input :title, label: 'Book Title'%>
     <%= f.input :description %>
-    <%= f.input :author %>
+    <%= f.input :author %> <br>
+
+    <h3>Have a Review? Add One!</h3>
+ 
+    <%= f.simple_fields_for :reviews do |r|%>
+      <%=r.input :rating%>
+      <%=r.input :comment%>
+    <%end%>
+
+
+
     <%= f.button :submit %>
+    
 <%end %>
 

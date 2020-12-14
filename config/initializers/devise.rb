@@ -93,8 +93,8 @@ Devise.setup do |config|
   # config.paranoid = true
   
   #GOES HERE$$$$$$$$$$$$$%%%%%%%%%%%%%%$$$$$$$$$$$$$$$$$$
-  config.omniauth :github, '249b749f5c4110deb01b
-  ', 'c3f801154c2756a51961b8483fc0017f3345bd6f', :scope => 'user:email'
+  #config.omniauth :github, '249b749f5c4110deb01b
+  #', 'c3f801154c2756a51961b8483fc0017f3345bd6f', :scope => 'user:email'
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
@@ -275,7 +275,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'user,public_repo'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

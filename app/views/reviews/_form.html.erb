@@ -1,7 +1,7 @@
 
 
 
-<%=simple_form_for([@book, @book.reviews.build]) do |f| %>  
+<%=simple_form_for([@book, @review]) do |f| %>  
 
    
 <% if @review.errors.any? %>
@@ -16,22 +16,11 @@
   </div>
 <% end %>
     
-    
+    <%= f.hidden_field :book_id, value: @book.id  %>
     <%= f.input :rating%>
     <%= f.input :comment%>
         
-        <div> 
-        <h3>Or create a new Book:</h3>
-            <%= f.fields_for :book, Book.new do |book_attributes|%>
-                <%= book_attributes.input :title, label: "Title: " %>
-                <%= book_attributes.input :author, label: "Author: " %>
-                <%= book_attributes.input :description, label: "Description: " %>
-            <% end %>
         
-        
-        
-        </div>
-    
     
     <%= f.button :submit%>
 

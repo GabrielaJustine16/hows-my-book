@@ -1,6 +1,10 @@
 class User < ApplicationRecord
+  
+
   has_many :reviews
   has_many :books, through: :reviews
+  #has_many :reviews, through: :books
+  
 
   validates :email, confirmation: true
   # Include default devise modules. Others available are:

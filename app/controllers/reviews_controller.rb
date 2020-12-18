@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
     before_action :find_book
-	before_action :find_review, only: [:edit, :update, :destroy]
+	before_action :find_review, only: [:create,:edit, :update, :destroy]
 	before_action :authenticate_user!, only: [:new, :edit]
 
 
@@ -17,6 +17,8 @@ class ReviewsController < ApplicationController
       end
     
     def new
+
+        
         @review = @book.reviews.build
 
     end 
